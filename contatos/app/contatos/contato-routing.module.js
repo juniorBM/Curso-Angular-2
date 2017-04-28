@@ -5,33 +5,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const contato_service_1 = require("./contato.service");
 const contato_detalhe_component_1 = require("./contato-detalhe.component");
-const contato_routing_module_1 = require("./contato-routing.module");
 const contatos_lista_component_1 = require("./contatos-lista.component");
+const router_1 = require("@angular/router");
 const core_1 = require("@angular/core");
-const common_1 = require("@angular/common");
-const forms_1 = require("@angular/forms");
-let ContatosModule = class ContatosModule {
+const contatoRoutes = [
+    {
+        path: 'contato',
+        component: contatos_lista_component_1.ContatosListaComponent
+    },
+    {
+        path: 'contato/save',
+        component: contato_detalhe_component_1.ContatoDetalheComponent
+    },
+    {
+        path: 'contato/save/:id',
+        component: contato_detalhe_component_1.ContatoDetalheComponent
+    }
+];
+let ContatoRoutingModule = class ContatoRoutingModule {
 };
-ContatosModule = __decorate([
+ContatoRoutingModule = __decorate([
     core_1.NgModule({
         imports: [
-            common_1.CommonModule,
-            contato_routing_module_1.ContatoRoutingModule,
-            forms_1.FormsModule
-        ],
-        declarations: [
-            contatos_lista_component_1.ContatosListaComponent,
-            contato_detalhe_component_1.ContatoDetalheComponent
+            router_1.RouterModule.forChild(contatoRoutes)
         ],
         exports: [
-            contatos_lista_component_1.ContatosListaComponent
-        ],
-        providers: [
-            contato_service_1.ContatoService
+            router_1.RouterModule
         ]
     })
-], ContatosModule);
-exports.ContatosModule = ContatosModule;
-//# sourceMappingURL=contatos.module.js.map
+], ContatoRoutingModule);
+exports.ContatoRoutingModule = ContatoRoutingModule;
+//# sourceMappingURL=contato-routing.module.js.map

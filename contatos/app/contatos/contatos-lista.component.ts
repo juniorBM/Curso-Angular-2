@@ -1,6 +1,6 @@
+import { ContatoService } from './contato.service';
 import { Contato } from './contato.model';
-import { CONTATOS } from './contatos-mock';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -9,6 +9,15 @@ import { Component } from '@angular/core';
     templateUrl: 'contatos-lista.component.html'
 })
 
-export class ContatosListaComponent {
-    contatos: Contato[] = CONTATOS;
+export class ContatosListaComponent implements OnInit {
+    contatos: Contato[];
+
+    constructor(private contatoService: ContatoService) {}
+
+    ngOnInit(): void {
+        this.contatoService.getContatos()
+        .then((contatos: Contato[]) => {
+            this.contatos = contatos;
+        }).catch(err => console.log(err));
+    }
 }

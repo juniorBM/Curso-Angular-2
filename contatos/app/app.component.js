@@ -10,11 +10,9 @@ let AppComponent = class AppComponent {
 };
 AppComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         selector: 'my-app',
-        template: `
-        <h1>Hy First Angular 2</h1>
-        <contatos-lista></contatos-lista>
-    `
+        templateUrl: 'app.component.html'
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
