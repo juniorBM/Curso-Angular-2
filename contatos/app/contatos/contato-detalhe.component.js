@@ -18,9 +18,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
         this.contatoService = contatoService;
         this.route = route;
         this.location = location;
-    }
-    teste() {
-        console.log(this.contato);
+        this.isNew = true;
     }
     ngOnInit() {
         this.contato = new contato_model_1.Contato(0, '', '', '');
@@ -28,6 +26,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             let id = +params['id'];
             console.log(params);
             if (id) {
+                this.isNew = false;
                 this.contatoService.getContato(id)
                     .then((contato) => {
                     console.log(contato);
@@ -35,6 +34,30 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
                 });
             }
         });
+    }
+    getFormGroupClass(isValid, isPristine) {
+        return {
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,
+            'has-success': isValid && !isPristine
+        };
+    }
+    getFormControlClass(isValid, isPristine) {
+        return {
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
+    }
+    onSubmit() {
+        let promise;
+        if (this.isNew) {
+            promise = this.contatoService.create(this.contato);
+        }
+        else {
+            promise = this.contatoService.update(this.contato);
+        }
+        promise.then(contato => this.location.back());
     }
 };
 ContatoDetalheComponent = __decorate([

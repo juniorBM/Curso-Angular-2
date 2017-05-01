@@ -13,18 +13,13 @@ import { Location } from '@angular/common';
 export class ContatoDetalheComponent implements OnInit {
 
     contato: Contato;
+    private isNew: boolean = true;
 
     constructor(
         private contatoService: ContatoService,
         private route: ActivatedRoute,
         private location: Location
     ) {}
-
-    teste(): void {
-        console.log(this.contato);
-        
-        
-    }
 
     ngOnInit(): void {
 
@@ -36,6 +31,7 @@ export class ContatoDetalheComponent implements OnInit {
             console.log(params);
 
             if(id) {
+                this.isNew = false;
                 this.contatoService.getContato(id)
                 .then((contato: Contato) => {
                     console.log(contato);
@@ -44,5 +40,33 @@ export class ContatoDetalheComponent implements OnInit {
             }
         });
         
+    }
+
+    getFormGroupClass(isValid: boolean, isPristine: boolean): {} {
+        return{
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,
+            'has-success': isValid && !isPristine
+        };
+    }
+
+    getFormControlClass(isValid: boolean, isPristine: boolean): {} {
+        return{
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
+    }
+
+    onSubmit(): void {
+
+        let promise;
+        if(this.isNew){
+            promise = this.contatoService.create(this.contato);
+        }else {
+            promise = this.contatoService.update(this.contato);
+        }
+
+        promise.then(contato => this.location.back());
     }
 }
