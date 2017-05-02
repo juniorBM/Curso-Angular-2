@@ -10,5 +10,5 @@
         },
         "**/*.js.map": true
     },
-    "vsicons.presets.angular": false
+    "vsicons.presets.angular": true
 }

@@ -3,6 +3,7 @@ import { Contato } from './contato.model';
 import { CONTATOS } from './contatos-mock';
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
+import { Observable } from "rxjs/Observable";
 
 
 
@@ -84,5 +85,11 @@ export class ContatoService {
            console.log('terceiro then');
            return this.getContatos();
         });
+    }
+
+    search(term: string): Observable<Contato[]>{
+        return this.http
+        .get(`${this.contatoUrl}/?nome=${term}`)
+        .map((res: Response) => res.json().data as Contato[]);
     }
 }

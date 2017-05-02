@@ -12,10 +12,9 @@ const dialog_service_1 = require("./../dialog.service");
 const contato_service_1 = require("./contato.service");
 const core_1 = require("@angular/core");
 let ContatosListaComponent = class ContatosListaComponent {
-    constructor(contatoService, dialogService, currentTimeout) {
+    constructor(contatoService, dialogService) {
         this.contatoService = contatoService;
         this.dialogService = dialogService;
-        this.currentTimeout = currentTimeout;
         this.contatos = [];
     }
     ngOnInit() {
@@ -56,10 +55,10 @@ let ContatosListaComponent = class ContatosListaComponent {
         this.mensagem = mensagem;
         this.montarClasses(mensagem.tipo);
         if (mensagem.tipo != 'danger') {
-            if (this.currentTimeout) {
-                clearTimeout(this.currentTimeout);
-            }
-            this.currentTimeout = setTimeout(() => {
+            // if(this.currentTimeout){
+            //     clearTimeout(this.currentTimeout);
+            // }
+            setTimeout(() => {
                 this.mensagem = undefined;
             }, 3000);
         }
@@ -78,7 +77,7 @@ ContatosListaComponent = __decorate([
         templateUrl: 'contatos-lista.component.html'
     }),
     __metadata("design:paramtypes", [contato_service_1.ContatoService,
-        dialog_service_1.DialogService, Object])
+        dialog_service_1.DialogService])
 ], ContatosListaComponent);
 exports.ContatosListaComponent = ContatosListaComponent;
 //# sourceMappingURL=contatos-lista.component.js.map

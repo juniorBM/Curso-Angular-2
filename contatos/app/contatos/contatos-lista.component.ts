@@ -17,8 +17,8 @@ export class ContatosListaComponent implements OnInit {
 
     constructor(
         private contatoService: ContatoService, 
-        private dialogService: DialogService,
-        private currentTimeout: any
+        private dialogService: DialogService
+        // private currentTimeout: any
     ) {}
 
     ngOnInit(): void {
@@ -61,10 +61,10 @@ export class ContatosListaComponent implements OnInit {
         this.mensagem = mensagem;
         this.montarClasses(mensagem.tipo);
         if (mensagem.tipo != 'danger') {
-            if(this.currentTimeout){
-                clearTimeout(this.currentTimeout);
-            }
-                this.currentTimeout = setTimeout(() => {
+            // if(this.currentTimeout){
+            //     clearTimeout(this.currentTimeout);
+            // }
+                setTimeout(() => {
                 this.mensagem = undefined
             }, 3000);
         }
