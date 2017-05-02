@@ -3,7 +3,7 @@ import { Contato } from './contato.model';
 import { CONTATOS } from './contatos-mock';
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 
 
