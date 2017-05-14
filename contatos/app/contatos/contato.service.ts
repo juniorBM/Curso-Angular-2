@@ -1,3 +1,4 @@
+import { ServiceInterface } from './../interfaces/service.interface';
 import { Http, Headers, Response } from '@angular/http';
 import { Contato } from './contato.model';
 import { CONTATOS } from './contatos-mock';
@@ -8,7 +9,7 @@ import { Observable } from "rxjs";
 
 
 @Injectable()
-export class ContatoService {
+export class ContatoService implements ServiceInterface<Contato> {
 
     private contatoUrl: string = 'app/contatos';
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
@@ -17,7 +18,7 @@ export class ContatoService {
         private http: Http
     ){}
 
-    getContatos(): Promise<Contato[]> {
+    findAll(): Promise<Contato[]> {
         return this.http.get(this.contatoUrl)
             .toPromise()
             .then(response => response.json().data as Contato[])
@@ -25,8 +26,8 @@ export class ContatoService {
         // return Promise.resolve(CONTATOS);
     }
 
-    getContato(id: number) : Promise<Contato> {
-        return this.getContatos()
+    find(id: number) : Promise<Contato> {
+        return this.findAll()
             .then((contatos: Contato[]) => contatos.find(contato => contato.id === id));
     }
 
@@ -83,7 +84,7 @@ export class ContatoService {
         })
         .then(() => {
            console.log('terceiro then');
-           return this.getContatos();
+           return this.findAll();
         });
     }
 

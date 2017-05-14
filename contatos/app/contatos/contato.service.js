@@ -17,15 +17,15 @@ let ContatoService = class ContatoService {
         this.contatoUrl = 'app/contatos';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
-    getContatos() {
+    findAll() {
         return this.http.get(this.contatoUrl)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
         // return Promise.resolve(CONTATOS);
     }
-    getContato(id) {
-        return this.getContatos()
+    find(id) {
+        return this.findAll()
             .then((contatos) => contatos.find(contato => contato.id === id));
     }
     handleError(err) {
@@ -75,7 +75,7 @@ let ContatoService = class ContatoService {
         })
             .then(() => {
             console.log('terceiro then');
-            return this.getContatos();
+            return this.findAll();
         });
     }
     search(term) {
